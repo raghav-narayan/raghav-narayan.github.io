@@ -1,37 +1,27 @@
 import React from "react";
 
 const skills = [
-  "Python",
-  "JavaScript",
-  "TypeScript",
-  "Node.js",
-  "React",
-  "Flask",
-  "SQL",
-  "MongoDB",
-  "Docker",
-  "Azure",
-  "REST APIs",
-  "CI/CD",
-  "GitHub",
-  "Machine Learning",
-  "Data Pipelines",
-  "TDD",
+  "Python", "JavaScript", "TypeScript", "Node.js", "React", "Flask",
+  "SQL", "MongoDB", "Docker", "Azure", "REST APIs", "CI/CD",
+  "GitHub", "Machine Learning", "Data Pipelines", "TDD"
 ];
 
 export default function SkillsSection() {
   return (
-    <section className="py-16 bg-white px-6 max-w-5xl mx-auto" id="skills">
-      <h2 className="text-3xl font-bold text-center mb-10">Technical Skills</h2>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 text-center">
-        {skills.map((skill) => (
-          <div
-            key={skill}
-            className="bg-gray-100 p-4 rounded shadow text-sm font-medium hover:bg-blue-100 transition"
-          >
-            {skill}
-          </div>
-        ))}
+    <section className="py-5 bg-light text-center" id="skills">
+      <div className="container">
+        <h2 className="mb-4 fw-bold">Technical Skills</h2>
+        <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-4">
+          {skills.map((skill, index) => (
+            <div key={index} className="col">
+              <div className="card shadow-sm border-0 h-100">
+                <div className="card-body d-flex align-items-center justify-content-center">
+                  <span className="fw-semibold">{skill}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
