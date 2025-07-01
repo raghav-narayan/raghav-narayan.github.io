@@ -1,18 +1,32 @@
 import React from "react";
+import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import AboutSection from "./components/AboutSection";
 import SkillsSection from "./components/SkillsSection";
+import ExperienceSection from "./components/ExperienceSection";
 import ProjectsSection from "./components/ProjectsSection";
+import BlogSection from "./components/BlogSection";
+import TestimonialsSection from "./components/TestimonialsSection";
+import CertificationsSection from "./components/CertificationsSection";
 import ContactSection from "./components/ContactSection";
+import SideNav from "./components/SideNav";
 
 export default function App() {
   return (
-    <div className="bg-gray-50 text-gray-900 font-sans">
-      <HeroSection />
-      <AboutSection />
-      <SkillsSection />
-      <ProjectsSection />
-      <ContactSection />
-    </div>
+    <>
+      {/* <Navbar /> */}
+      <SideNav />
+      <div className=""> {/* Padding to offset fixed navbar */} 
+        <HeroSection />
+        <AboutSection />
+        <SkillsSection />
+        <ExperienceSection />
+        <ProjectsSection />
+        <BlogSection />
+        <TestimonialsSection />
+        <CertificationsSection />
+        <ContactSection />
+      </div>
+    </>
   );
 }
