@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import { FaHome, FaUser, FaCode, FaProjectDiagram, FaBlog, FaStar, FaEnvelope } from "react-icons/fa";
+import {
+  FaHome,
+  FaUser,
+  FaCode,
+  FaProjectDiagram,
+  FaBlog,
+  FaStar,
+  FaEnvelope,
+  FaBriefcase
+} from "react-icons/fa";
 
 const sections = [
   { id: "home", icon: <FaHome />, label: "Home" },
   { id: "about", icon: <FaUser />, label: "About" },
   { id: "skills", icon: <FaCode />, label: "Skills" },
+  { id: "experience", icon: <FaBriefcase />, label: "Experience" },
   { id: "projects", icon: <FaProjectDiagram />, label: "Projects" },
   { id: "blogs", icon: <FaBlog />, label: "Blogs" },
   { id: "testimonials", icon: <FaStar />, label: "Testimonials" },
@@ -16,19 +26,29 @@ export default function SideNav() {
   const [activeId, setActiveId] = useState("home");
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-40% 0px -55% 0px", threshold: 0.1 }
+    const sectionElements = sections.map(({ id }) =>
+      document.getElementById(id)
     );
 
-    sections.forEach(({ id }) => {
-      const el = document.getElementById(id);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleSections = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+        if (visibleSections.length > 0) {
+          const topMost = visibleSections[0];
+          setActiveId(topMost.target.id);
+        } else {
+          setActiveId("home"); // fallback when no section is intersecting
+        }
+      },
+      {
+        threshold: [0.25, 0.5, 0.75] // more responsive visibility range
+      }
+    );
+
+    sectionElements.forEach((el) => {
       if (el) observer.observe(el);
     });
 
