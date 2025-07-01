@@ -8,15 +8,15 @@ const experiences = [
     duration: "Jun 2025 – Present",
     location: "Arlington, TX",
     bullets: [
-      "Building automation tools and Python services for academic data processing.",
-      "Contributing to deployment and performance monitoring of microservices.",
+      "Supporting the development and optimization of a weather visualization tool for infrastructure resilience research",
+      "Working on Python-based services using Streamlit, and other libraries for data presentation and backend logic"
     ],
-    tech: ["Python", "Flask", "SQL", "Azure"],
+    tech: ["Python", "Numpy", "Streamlit", "Pandas"],
   },
   {
     title: "Software Engineer Intern – Full Stack",
     company: "NVIT",
-    logo: "/companies/nvit.png",
+    logo: "/companies/nvit.jpeg",
     duration: "Jan 2025 – May 2025",
     location: "Frisco, TX",
     bullets: [
@@ -42,7 +42,7 @@ const experiences = [
   {
     title: "Backend Engineer – Conversational AI",
     company: "Cognizant",
-    logo: "/companies/cognizant.png",
+    logo: "/companies/cognizant.jpeg",
     duration: "Oct 2021 – Feb 2023",
     location: "Remote",
     bullets: [
@@ -55,7 +55,7 @@ const experiences = [
   {
     title: "Frontend Engineer – Omni Channel",
     company: "Cognizant",
-    logo: "/companies/cognizant.png",
+    logo: "/companies/cognizant.jpeg",
     duration: "Jan 2020 – Sep 2021",
     location: "Remote",
     bullets: [
@@ -77,17 +77,18 @@ export default function ExperienceSection() {
               <div className="border rounded p-3 h-100 shadow-sm experience-card">
                 <div className="d-flex align-items-center mb-2">
                   <img
-                    src={exp.logo}
+                    src={process.env.PUBLIC_URL + exp.logo}
                     alt={exp.company}
-                    className="me-3"
-                    style={{ width: "40px", height: "40px", objectFit: "contain" }}
+                    style={{ width: "40px", height: "40px", objectFit: "contain", marginRight: "12px" }}
                   />
                   <div>
                     <h6 className="mb-0 fw-bold">{exp.title}</h6>
                     <small className="text-muted">{exp.company}</small>
                   </div>
                 </div>
-                <div className="text-muted small mb-2">{exp.duration} · {exp.location}</div>
+                <div className="text-muted small mb-2">
+                  {exp.duration} · {exp.location}
+                </div>
                 <ul className="small text-muted ps-3 mb-2">
                   {exp.bullets.map((b, j) => (
                     <li key={j}>{b}</li>
@@ -104,6 +105,7 @@ export default function ExperienceSection() {
             </div>
           ))}
         </div>
+
         <style>{`
           .experience-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;

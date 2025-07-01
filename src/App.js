@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "./components/Navbar";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 import HeroSection from "./components/HeroSection";
 import AboutSection from "./components/AboutSection";
 import SkillsSection from "./components/SkillsSection";
@@ -26,6 +26,7 @@ export default function App() {
         <TestimonialsSection />
         <CertificationsSection />
         <ContactSection />
+        {/* <ScrollToTopButton /> */}
       </div>
     </>
   );

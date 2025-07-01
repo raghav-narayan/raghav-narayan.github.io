@@ -1,11 +1,10 @@
-import React from "react";
-import { FaExternalLinkAlt } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaExternalLinkAlt, FaMedium } from "react-icons/fa";
 
 const blogs = [
   {
     title: "Roadmap to Generative AI — 2024",
     description: "This blog series serves as a reference for learning and achieving Generative AI mastery in 2024.",
-    date: "Jul 19, 2024",
     link: "https://technotronic.medium.com/roadmap-to-generative-ai-2024-1c8a1e87bc14",
     tags: ["Generative AI", "Roadmap", "AI", "NLP"],
     image: process.env.PUBLIC_URL + "/blogs/generative_ai.jpeg"
@@ -13,7 +12,6 @@ const blogs = [
   {
     title: "Transforming Software Development with AI: Top Applications You Need to Know — Part 1",
     description: "Explore how AI is transforming the landscape of software development with key applications and examples.",
-    date: "Nov 24, 2024",
     link: "https://technotronic.medium.com/transforming-software-development-with-ai-top-applications-you-need-to-know-part-1-e9933e514d88",
     tags: ["AI", "Software Engineering", "Machine Learning"],
     image: process.env.PUBLIC_URL + "/blogs/ai_software.jpeg"
@@ -21,14 +19,30 @@ const blogs = [
   {
     title: "JavaScript — Behind the Scenes",
     description: "Demystifying the components of JavaScript runtime and how it works under the hood.",
-    date: "Jul 14, 2021",
     link: "https://technotronic.medium.com/javascript-behind-the-scenes",
     tags: ["JavaScript", "Web Development", "Front End"],
     image: process.env.PUBLIC_URL + "/blogs/javascript.png"
+  },
+  {
+    title: "CSS Positioning: A walkthrough",
+    description: "A deep dive into how CSS positioning works with real-world navbar examples.",
+    link: "https://technotronic.medium.com/css-positioning-a-walkthrough",
+    tags: ["CSS", "Positioning", "Frontend"],
+    image: process.env.PUBLIC_URL + "/blogs/css_positioning.png"
+  },
+  {
+    title: "Playing through CSS Flexbox",
+    description: "The ultimate beginner guide to mastering layout with Flexbox in CSS.",
+    link: "https://technotronic.medium.com/playing-through-css-flexbox",
+    tags: ["CSS", "Flexbox", "Responsive Design"],
+    image: process.env.PUBLIC_URL + "/blogs/flexbox.png"
   }
 ];
 
 export default function BlogSection() {
+  const [showAll, setShowAll] = useState(false);
+  const displayedBlogs = showAll ? blogs : blogs.slice(0, 3);
+
   return (
     <section className="py-5 bg-light" id="blogs">
       <div className="container">
@@ -37,7 +51,7 @@ export default function BlogSection() {
           Some of my recent writing on AI, software development, and front-end technologies.
         </p>
         <div className="row g-4">
-          {blogs.map((blog, index) => (
+          {displayedBlogs.map((blog, index) => (
             <div className="col-md-6 col-lg-4" key={index}>
               <div className="card h-100 shadow-sm border-0 blog-card">
                 <img
@@ -47,8 +61,17 @@ export default function BlogSection() {
                   style={{ height: "180px", objectFit: "cover" }}
                 />
                 <div className="card-body d-flex flex-column">
-                  <h5 className="card-title">{blog.title}</h5>
-                  <p className="text-muted small mb-2">{blog.date}</p>
+                  <h5 className="card-title d-flex align-items-center gap-2">
+                    <FaMedium className="text-dark" />
+                    <a
+                      href={blog.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-decoration-none text-dark"
+                    >
+                      {blog.title}
+                    </a>
+                  </h5>
                   <p className="card-text small mb-2">{blog.description}</p>
                   <div className="mb-3 d-flex flex-wrap gap-2">
                     {blog.tags.map((tag, i) => (
@@ -72,15 +95,26 @@ export default function BlogSection() {
             </div>
           ))}
         </div>
+
+        {/* Toggle Button */}
+        <div className="text-center mt-4">
+          <button
+            className="btn btn-outline-primary btn-sm"
+            onClick={() => setShowAll(!showAll)}
+          >
+            {showAll ? "Show Less" : "See More Blogs"}
+          </button>
+        </div>
       </div>
 
       <style>{`
         .blog-card {
           transition: transform 0.3s ease, box-shadow 0.3s ease;
+          border-radius: 8px;
         }
         .blog-card:hover {
           transform: translateY(-5px);
-          box-shadow: 0 0 20px rgba(0,0,0,0.1);
+          box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
       `}</style>
     </section>

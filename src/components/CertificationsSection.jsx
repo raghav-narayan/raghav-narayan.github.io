@@ -2,22 +2,22 @@ import React from "react";
 
 const certifications = [
   {
-    name: "Google Cloud Engineering Specialization",
+    name: "Cloud Engineering with Google Cloud",
     issuer: "Coursera",
-    badge: "https://www.gstatic.com/devrel-devsite/prod/vf74e4b6be2710ad2d1b558c5c1d94a4e11e07d79145c0f0efecf48f0a379ec7e/cloud/images/favicons/onecloud/favicon.ico",
-    link: "https://www.coursera.org/account/accomplishments/specialization/XYZ123",
+    badge: process.env.PUBLIC_URL + "/certs/gcp.png",
+    link: "https://www.coursera.org/account/accomplishments/specialization/certificate/RTX89DZN932T",
   },
   {
-    name: "Oracle Cloud Infrastructure Foundations",
+    name: "Oracle Cloud Infrastructure Foundations Associate",
     issuer: "Oracle",
-    badge: "https://www.oracle.com/a/tech/img/certification-logo.png",
-    link: "https://catalog-education.oracle.com/pls/certview/sharebadge?id=XYZ456",
+    badge: process.env.PUBLIC_URL + "/certs/oracle.png",
+    link: "https://www.credly.com/badges/9c53c4b3-55a3-49fa-8551-25778cb79b0f/linked_in_profile",
   },
   {
-    name: "Applied AI & ML",
+    name: "The Data Science Course 2020: Complete Bootcamp",
     issuer: "Udemy",
     badge: "https://cdn.worldvectorlogo.com/logos/udemy-2.svg",
-    link: "https://www.udemy.com/certificate/UC-XYZ789/",
+    link: "https://www.udemy.com/certificate/UC-cd0b4a75-2070-4aa0-863a-fc7ab3cdc899/",
   },
 ];
 
@@ -29,15 +29,25 @@ export default function CertificationsSection() {
         <div className="row g-4 justify-content-center">
           {certifications.map((cert, index) => (
             <div key={index} className="col-md-4 col-sm-6">
-              <div className="card h-100 shadow-sm border-0 text-center p-3">
-                <img
-                  src={cert.badge}
-                  alt={cert.name}
-                  style={{ height: "60px", objectFit: "contain", marginBottom: "1rem" }}
-                />
+              <div className="card h-100 shadow-sm border-0 text-center p-4">
+                <div className="d-flex justify-content-center align-items-center mb-4" style={{ minHeight: "100px" }}>
+                  <img
+                    src={cert.badge}
+                    alt={cert.name}
+                    style={{
+                      height: "80px",
+                      width: "auto",
+                      maxWidth: "180px",
+                      objectFit: "contain",
+                      transition: "transform 0.3s ease",
+                    }}
+                    onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.1)")}
+                    onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
+                  />
+                </div>
                 <h6 className="fw-semibold">{cert.name}</h6>
                 <small className="text-muted">{cert.issuer}</small>
-                <div className="mt-2">
+                <div className="mt-3">
                   <a
                     href={cert.link}
                     className="btn btn-sm btn-outline-primary"
