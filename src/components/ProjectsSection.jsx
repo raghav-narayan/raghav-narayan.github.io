@@ -76,7 +76,7 @@ export default function ProjectsSection() {
       <div className="container">
         <h2 className="text-center fw-bold mb-4">Projects</h2>
         <p className="text-center mb-5 text-muted fs-6">
-          A few projects that showcase my skills in full-stack engineering, AI integration, and machine learning.
+          Some of my projects that highlight my experience across software engineering and applied AI.
         </p>
         <div className="row g-4">
           {visibleProjects.map((project, index) => (

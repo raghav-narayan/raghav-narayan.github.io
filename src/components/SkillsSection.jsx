@@ -104,7 +104,7 @@ export default function SkillsSection() {
       <div className="container">
         <h2 className="text-center fw-bold mb-4">Technical Skills</h2>
         <p className="text-center mb-5 fs-6">
-          Technologies I’ve worked with across frontend, backend, cloud, DevOps, and AI.
+          Tools and technologies I’ve used across full-stack development, cloud infrastructure, and AI workflows
         </p>
 
         <div className="row g-4">
