@@ -165,6 +165,7 @@ export default function ProjectsSection() {
           </div>
         )}
       </div>
+      
 
       <style>{`
         .project-card {

@@ -19,21 +19,21 @@ const blogs = [
   {
     title: "JavaScript — Behind the Scenes",
     description: "Demystifying the components of JavaScript runtime and how it works under the hood.",
-    link: "https://technotronic.medium.com/javascript-behind-the-scenes",
+    link: "https://medium.com/dsc-sastra-deemed-to-be-university/javascript-behind-the-scenes-f693c5401c47",
     tags: ["JavaScript", "Web Development", "Front End"],
     image: process.env.PUBLIC_URL + "/blogs/javascript.png"
   },
   {
     title: "CSS Positioning: A walkthrough",
     description: "A deep dive into how CSS positioning works with real-world navbar examples.",
-    link: "https://technotronic.medium.com/css-positioning-a-walkthrough",
+    link: "https://medium.com/weekly-webtips/css-positioning-a-walkthrough-20b8f762b6e5",
     tags: ["CSS", "Positioning", "Frontend"],
     image: process.env.PUBLIC_URL + "/blogs/css_positioning.png"
   },
   {
     title: "Playing through CSS Flexbox",
     description: "The ultimate beginner guide to mastering layout with Flexbox in CSS.",
-    link: "https://technotronic.medium.com/playing-through-css-flexbox",
+    link: "https://technotronic.medium.com/playing-through-css-flexbox-718b3d91f605",
     tags: ["CSS", "Flexbox", "Responsive Design"],
     image: process.env.PUBLIC_URL + "/blogs/flexbox.png"
   }
