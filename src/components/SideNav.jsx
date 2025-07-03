@@ -8,7 +8,9 @@ import {
   FaBlog,
   FaStar,
   FaEnvelope,
-  FaBriefcase
+  FaBriefcase,
+  FaBars,
+  FaTimes
 } from "react-icons/fa";
 
 const sections = [
@@ -24,6 +26,7 @@ const sections = [
 
 export default function SideNav() {
   const [activeId, setActiveId] = useState("home");
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const sectionElements = sections.map(({ id }) =>
@@ -40,11 +43,11 @@ export default function SideNav() {
           const topMost = visibleSections[0];
           setActiveId(topMost.target.id);
         } else {
-          setActiveId("home"); // fallback when no section is intersecting
+          setActiveId("home");
         }
       },
       {
-        threshold: [0.25, 0.5, 0.75] // more responsive visibility range
+        threshold: [0.25, 0.5, 0.75]
       }
     );
 
@@ -56,24 +59,41 @@ export default function SideNav() {
   }, []);
 
   return (
-    <div className="position-fixed top-50 start-0 translate-middle-y d-flex flex-column gap-3 ps-2 z-3">
-      {sections.map((s, idx) => (
-        <OverlayTrigger
-          key={idx}
-          placement="right"
-          overlay={<Tooltip>{s.label}</Tooltip>}
-        >
-          <a
-            href={`#${s.id}`}
-            className={`btn rounded-circle shadow-sm d-flex align-items-center justify-content-center ${
-              activeId === s.id ? "btn-primary text-white" : "btn-light"
-            }`}
-            style={{ width: 45, height: 45 }}
+    <>
+      {/* Toggle button for small screens */}
+      <button
+        className="btn btn-primary d-md-none position-fixed top-0 start-0 m-3 z-3"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label="Toggle navigation"
+      >
+        {isOpen ? <FaTimes /> : <FaBars />}
+      </button>
+
+      {/* SideNav (visible on md and up OR toggle open) */}
+      <div
+        className={`position-fixed top-50 start-0 translate-middle-y d-flex flex-column gap-3 ps-2 z-3 ${
+          isOpen ? "d-flex" : "d-none d-md-flex"
+        }`}
+      >
+        {sections.map((s, idx) => (
+          <OverlayTrigger
+            key={idx}
+            placement="right"
+            overlay={<Tooltip>{s.label}</Tooltip>}
           >
-            {s.icon}
-          </a>
-        </OverlayTrigger>
-      ))}
-    </div>
+            <a
+              href={`#${s.id}`}
+              onClick={() => setIsOpen(false)} // close on click
+              className={`btn rounded-circle shadow-sm d-flex align-items-center justify-content-center ${
+                activeId === s.id ? "btn-primary text-white" : "btn-light"
+              }`}
+              style={{ width: 45, height: 45 }}
+            >
+              {s.icon}
+            </a>
+          </OverlayTrigger>
+        ))}
+      </div>
+    </>
   );
 }

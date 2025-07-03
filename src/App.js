@@ -16,7 +16,7 @@ export default function App() {
     <>
       {/* <Navbar /> */}
       <SideNav />
-      <div className=""> {/* Padding to offset fixed navbar */} 
+      <main> {/* Padding to offset fixed navbar */} 
         <HeroSection />
         <AboutSection />
         <SkillsSection />
@@ -27,7 +27,7 @@ export default function App() {
         <CertificationsSection />
         <ContactSection />
         {/* <ScrollToTopButton /> */}
-      </div>
+      </main>
     </>
   );
 }
