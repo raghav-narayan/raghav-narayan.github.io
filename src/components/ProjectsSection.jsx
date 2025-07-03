@@ -34,6 +34,22 @@ const projects = [
     demo: ""
   },
   {
+  title: "JIRA Exploration – Agile SMS",
+  description: "Simulated an Agile workflow using JIRA for building a Student Management System. Implemented sprints, user stories, Kanban boards, issue types, and generated charts like burndown and cumulative flow for progress tracking.",
+  tech: ["JIRA", "Agile", "Scrum", "Kanban", "Burndown Charts"],
+  image: process.env.PUBLIC_URL + "/projects/jira_sms.png", // Make sure this image is added to your public/projects folder
+  github: "https://github.com/raghav-narayan/jira-exploration",
+  demo: ""
+  },
+  {
+  title: "Online Shop – Product Recommender",
+  description: "A console-based Java app simulating an e-commerce store with a frequency-based product recommendation engine using past purchase behavior.",
+  tech: ["Java", "OOP", "File I/O", "Exception Handling"],
+  image: process.env.PUBLIC_URL + "/projects/online_shop.png", // make sure to place this image in your public folder
+  github: "https://github.com/raghav-narayan/online-shop-pra",
+  demo: ""
+  },
+  {
     title: "Logistic Regression from Scratch",
     description: "Implemented logistic regression using SGD, log loss, and L2 regularization in NumPy. Trained and validated the model against Scikit-learn, achieving ~95% accuracy.",
     tech: ["Python", "NumPy", "Matplotlib", "ML Algorithms"],
