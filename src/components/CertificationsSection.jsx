@@ -12,13 +12,7 @@ const certifications = [
     issuer: "Oracle",
     badge: process.env.PUBLIC_URL + "/certs/oracle.png",
     link: "https://www.credly.com/badges/9c53c4b3-55a3-49fa-8551-25778cb79b0f/linked_in_profile",
-  },
-  {
-    name: "The Data Science Course 2020: Complete Bootcamp",
-    issuer: "Udemy",
-    badge: "https://cdn.worldvectorlogo.com/logos/udemy-2.svg",
-    link: "https://www.udemy.com/certificate/UC-cd0b4a75-2070-4aa0-863a-fc7ab3cdc899/",
-  },
+  }
 ];
 
 export default function CertificationsSection() {
