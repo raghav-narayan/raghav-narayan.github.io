@@ -1,24 +1,17 @@
-import React, { useState } from "react";
-import "./experience.css";
+import React from "react";
 
-const EXPERIENCES = [
+const experiences = [
   {
     title: "Research Software Engineer",
     company: "The University of Texas at Arlington",
     logo: "/companies/uta.png",
     duration: "Jun 2025 – Present",
     location: "Arlington, TX",
-    summary: "Weather viz tool for infrastructure resilience; Python/Streamlit data apps.",
     bullets: [
-      "Modular Streamlit pages for map overlays (precipitation/wind/outage).",
-      "Reusable Pandas/Numpy utilities; ~40% faster notebook→app handoff.",
-      "st.cache_data cut 50MB CSV load ~8s → ~2s."
+      "Supporting the development and optimization of a weather visualization tool for infrastructure resilience research",
+      "Working on Python-based services using Streamlit, and other libraries for data presentation and backend logic"
     ],
-    impact: [
-      "Research iteration ~2× faster via cached pipelines + pre-baked aggregates.",
-      "Reproducible env + schema contracts."
-    ],
-    tech: ["Python","Pandas","NumPy","Streamlit","Plotly","Leaflet/Folium"]
+    tech: ["Python", "Numpy", "Streamlit", "Pandas"],
   },
   {
     title: "Software Engineer Intern – Full Stack",
@@ -26,19 +19,13 @@ const EXPERIENCES = [
     logo: "/companies/nvit.jpeg",
     duration: "Jan 2025 – May 2025",
     location: "Frisco, TX",
-    summary: "ILMS v1 (biometrics + payroll) to QA-ready Azure deployment.",
     bullets: [
-      "React dashboards + Node APIs for onboarding/attendance/payroll.",
-      "Azure Face API liveness + GPS geofencing via FastAPI; no spoofing.",
-      "Dockerized services; Bitbucket→Azure App Service CI/CD.",
-      "15+ role-based analytics dashboards with exports."
+      "Released ILMS v1, a cloud-native government platform.",
+      "Developed React dashboards and Node.js APIs to automate workflows.",
+      "Integrated biometric tracking using Flask, Azure Face API, GPS geofencing.",
+      "Orchestrated CI/CD using Docker and Azure DevOps, reducing deployment time by 40%.",
     ],
-    impact: [
-      "Deployment effort −40%; check-in time −~50% after full Azure recognition.",
-      "Adopted across 5+ departments; QA unblocked 2 weeks earlier.",
-      "Attendance accuracy ~95%."
-    ],
-    tech: ["React","Node.js/Express","PostgreSQL","FastAPI","Docker","Azure App Service","Azure Face API","Bitbucket Pipelines"]
+    tech: ["React", "Node.js", "PostgreSQL", "Flask", "Docker", "Azure"],
   },
   {
     title: "Graduate Assistant – OIE",
@@ -46,13 +33,11 @@ const EXPERIENCES = [
     logo: "/companies/uta.png",
     duration: "Feb 2024 – Jan 2025",
     location: "Arlington, TX",
-    summary: "Audited immigration forms & optimized appointment logistics.",
     bullets: [
-      "Standardized checklists; reduced review time & rework.",
-      "Excel trackers increased scheduling visibility."
+      "Reviewed immigration forms and advised students on compliance.",
+      "Managed appointments and improved student operations logistics.",
     ],
-    impact: ["~15% faster review cycles via checklists & templates."],
-    tech: ["PeopleSoft","Excel"]
+    tech: ["PeopleSoft", "Excel"],
   },
   {
     title: "Backend Engineer – Conversational AI",
@@ -60,18 +45,12 @@ const EXPERIENCES = [
     logo: "/companies/cognizant.jpeg",
     duration: "Oct 2021 – Feb 2023",
     location: "Remote",
-    summary: "APIs for multilingual automotive chatbot (~100K MAUs, 12+ countries).",
     bullets: [
-      "Lead capture, recommendations, market-specific flows (Node/Express).",
-      "Azure Language Studio; structured logging & validation.",
-      "Stock-car recommender using 3rd-party inventory API.",
-      "Ran releases during DevOps transition; zero deployment errors."
+      "Built Node.js APIs for multilingual chatbot (100K+ MAUs) across 12+ countries.",
+      "Improved latency by 30% and implemented Azure Language Studio for NLP.",
+      "Applied TDD and Postman for unit, regression, and integration testing.",
     ],
-    impact: [
-      "+30% leads (India launch); ~10% lower bounce with stock-car feature.",
-      "p95 latency −30%; zero failed leads first month via SMTP alerts + RCA."
-    ],
-    tech: ["Node.js","Express","REST APIs","Azure App Service","Azure Monitor","Postman","TDD/Jest"]
+    tech: ["Node.js", "REST APIs", "Azure", "Postman", "TDD"],
   },
   {
     title: "Frontend Engineer – Omni Channel",
@@ -79,67 +58,63 @@ const EXPERIENCES = [
     logo: "/companies/cognizant.jpeg",
     duration: "Jan 2020 – Sep 2021",
     location: "Remote",
-    summary: "Responsive React UIs for U.S. e-commerce; internal training.",
     bullets: [
-      "WCAG-aware, mobile-first UIs; resolved 30+ UI/UX issues.",
-      "8-week frontend training with live coding; improved onboarding."
+      "Built responsive UIs with React for a US-based e-commerce client.",
+      "Resolved 30+ UI/UX bugs and conducted 10+ technical workshops.",
     ],
-    impact: ["Shorter bug cycles; more consistent components."],
-    tech: ["React","JavaScript","HTML5","CSS3","Jest"]
-  }
+    tech: ["React", "JavaScript", "HTML5", "CSS3"],
+  },
 ];
-
-function ExperienceCard({ exp }) {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <div className="xp-card">
-      <div className="xp-head">
-        <img className="xp-logo" src={exp.logo} alt={exp.company} />
-        <div>
-          <p className="xp-title">{exp.title}</p>
-          <div className="xp-company">{exp.company}</div>
-        </div>
-      </div>
-
-      <div className="xp-meta">{exp.duration} · {exp.location}</div>
-
-      {exp.summary && <p className="xp-summary">{exp.summary}</p>}
-
-      <ul className="xp-list">
-        {(open ? exp.bullets : exp.bullets.slice(0,3)).map((b, i) => <li key={i}>{b}</li>)}
-      </ul>
-
-      {open && exp.impact?.length > 0 && (
-        <>
-          <div className="xp-label">Impact</div>
-          <ul className="xp-list">
-            {exp.impact.map((i, k) => <li key={k}>{i}</li>)}
-          </ul>
-        </>
-      )}
-
-      <div className="xp-badges">
-        {exp.tech.map((t, i) => <span key={i} className="xp-badge">{t}</span>)}
-      </div>
-
-      <div className="xp-actions">
-        <button className="xp-btn" onClick={()=>setOpen(v=>!v)}>
-          {open ? "Show less" : "Show more"}
-        </button>
-      </div>
-    </div>
-  );
-}
 
 export default function ExperienceSection() {
   return (
-    <section id="experience" className="xp-section">
-      <div className="xp-container">
-        <h2 className="xp-h2">Experience</h2>
-        <div className="xp-grid">
-          {EXPERIENCES.map((e, i) => <ExperienceCard key={i} exp={e} />)}
+    <section className="py-5 bg-white" id="experience">
+      <div className="container">
+        <h2 className="text-center fw-bold mb-4">Experience</h2>
+        <div className="row g-4">
+          {experiences.map((exp, i) => (
+            <div key={i} className="col-md-6">
+              <div className="border rounded p-3 h-100 shadow-sm experience-card">
+                <div className="d-flex align-items-center mb-2">
+                  <img
+                    src={process.env.PUBLIC_URL + exp.logo}
+                    alt={exp.company}
+                    style={{ width: "40px", height: "40px", objectFit: "contain", marginRight: "12px" }}
+                  />
+                  <div>
+                    <h6 className="mb-0 fw-bold">{exp.title}</h6>
+                    <small className="text-muted">{exp.company}</small>
+                  </div>
+                </div>
+                <div className="text-muted small mb-2">
+                  {exp.duration} · {exp.location}
+                </div>
+                <ul className="small text-muted ps-3 mb-2">
+                  {exp.bullets.map((b, j) => (
+                    <li key={j}>{b}</li>
+                  ))}
+                </ul>
+                <div className="d-flex flex-wrap gap-2">
+                  {exp.tech.map((tech, k) => (
+                    <span key={k} className="badge bg-light text-dark border">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
+
+        <style>{`
+          .experience-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+          }
+          .experience-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+          }
+        `}</style>
       </div>
     </section>
   );

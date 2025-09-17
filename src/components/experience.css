@@ -1,0 +1,28 @@
+:root{
+  --fg:#111; --muted:#666; --bg:#fff; --card:#fff; --border:#e8e8e8;
+  --shadow:0 2px 16px rgba(0,0,0,.06); --radius:16px; --brand:#2563eb;
+}
+.xp-section{ background:var(--bg); padding:40px 0; }
+.xp-container{ max-width:1100px; margin:0 auto; padding:0 16px; }
+.xp-h2{ text-align:center; margin:0 0 24px; font-size:28px; }
+.xp-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(320px,1fr)); gap:16px; }
+
+.xp-card{ background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:16px;
+  box-shadow:var(--shadow); transition:transform .2s ease, box-shadow .2s ease; }
+.xp-card:hover{ transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.08); }
+
+.xp-head{ display:flex; gap:12px; align-items:center; margin-bottom:6px; }
+.xp-logo{ width:40px; height:40px; object-fit:contain; }
+.xp-title{ margin:0; font-size:16px; font-weight:700; }
+.xp-company{ color:var(--muted); font-size:13px; }
+.xp-meta{ color:var(--muted); font-size:12px; margin:6px 0 10px; }
+.xp-summary{ font-size:14px; margin:0 0 8px; }
+
+.xp-list{ margin:0 0 8px 18px; color:var(--muted); font-size:14px; }
+.xp-label{ font-weight:600; font-size:12px; margin:8px 0 4px; }
+
+.xp-badges{ display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.xp-badge{ display:inline-block; border:1px solid var(--border); background:#fafafa; padding:4px 8px; border-radius:999px; font-size:12px; }
+
+.xp-actions{ display:flex; justify-content:flex-end; margin-top:8px; }
+.xp-btn{ border:0; background:var(--brand); color:#fff; padding:8px 12px; border-radius:10px; font-size:13px; cursor:pointer; }
