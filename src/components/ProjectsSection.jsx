@@ -14,7 +14,7 @@ const projects = [
     description: "A media SaaS platform that enables users to compress videos, apply smart filters, and auto-generate captions using Gemini AI—built for content creators and marketers.",
     tech: ["Next.js", "Gemini AI", "Tailwind", "TypeScript"],
     image: process.env.PUBLIC_URL + "/projects/auracast.png",
-    github: "https://github.com/raghav-narayan/auracast",
+    github: "https://github.com/raghav-narayan/ai-cloudinary-saas",
     demo: "https://www.youtube.com/watch?v=l5T-Rx35ggQ"
   },
   {

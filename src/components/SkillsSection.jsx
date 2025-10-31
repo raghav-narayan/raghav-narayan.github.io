@@ -93,7 +93,6 @@ const groupedSkills = [
       { name: "Jira", icon: <SiJirasoftware /> },
       { name: "CLI", icon: "text" },
       { name: "Linux", icon: "text" },
-      // { name: "Debugger", icon: "text" },
     ],
   },
 ];
@@ -112,12 +111,13 @@ export default function SkillsSection() {
             <div key={i} className="col-12 col-md-6 col-lg-4">
               <div className="p-4 border rounded shadow-sm bg-white h-100">
                 <h6 className="fw-semibold text-primary mb-3">{group.title}</h6>
-                <div className="d-flex flex-wrap gap-4">
+                <div className="d-flex flex-wrap gap-4 justify-content-center">
                   {group.skills.map((skill, j) => (
                     <div
                       key={j}
                       className="text-center skill-icon"
                       style={{ width: "80px", cursor: "default" }}
+                      title={skill.name} // Tooltip added
                     >
                       <div className="mb-1">
                         {skill.icon === "text" ? (
@@ -152,8 +152,8 @@ export default function SkillsSection() {
           transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .skill-icon:hover {
-          transform: translateY(-4px) scale(1.05);
-          box-shadow: 0 0 12px rgba(0, 123, 255, 0.2);
+          transform: translateY(-6px) scale(1.1);
+          box-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
           background-color: #f8f9fa;
           border-radius: 8px;
         }
