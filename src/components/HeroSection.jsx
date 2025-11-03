@@ -1,88 +1,135 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Tilt from "react-parallax-tilt";
 import { motion, useAnimation } from "framer-motion";
-import {
-  FaGithub,
-  FaLinkedin,
-  FaMedium,
-  FaEnvelope,
-  FaFilePdf,
-} from "react-icons/fa";
+import HeroBackground from "./HeroBackground";
+import HeroOverlay from "./HeroOverlay";
+import { FaGithub, FaLinkedin, FaMedium, FaEnvelope, FaFilePdf } from "react-icons/fa";
 
 const roles = [
   "Software Engineer @ UTA",
   "Full-Stack Engineer | 3+ YOE",
-  "Cloud-Native & Scalable Systems",
+  "Builder of Cloud-Native Intelligence",
 ];
 
 export default function HeroSection() {
   const [index, setIndex] = useState(0);
   const controls = useAnimation();
+  const textRef = useRef(null);
 
+  // rotating roles
   useEffect(() => {
-    controls.start({ opacity: 1, y: 0 });
-    const interval = setInterval(() => {
-      controls.start({ opacity: 0, y: 20 }).then(() => {
-        setIndex((prev) => (prev + 1) % roles.length);
-        controls.start({ opacity: 1, y: 0 });
-      });
-    }, 2500);
-    return () => clearInterval(interval);
+    let active = true;
+    const loop = async () => {
+      if (!active) return;
+      await controls.start({ opacity: 1, y: 0 });
+      const timer = setInterval(async () => {
+        if (!active) return;
+        await controls.start({ opacity: 0, y: 15, transition: { duration: 0.3 } });
+        setIndex((p) => (p + 1) % roles.length);
+        await controls.start({ opacity: 1, y: 0, transition: { duration: 0.3, delay: 0.15 } });
+      }, 2200);
+      return () => clearInterval(timer);
+    };
+    loop();
+    return () => (active = false);
   }, [controls]);
+
+  // cursor-based parallax for text
+  useEffect(() => {
+    const textEl = textRef.current;
+    const handleMove = (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 15;
+      const y = (e.clientY / window.innerHeight - 0.5) * 15;
+      if (textEl)
+        textEl.style.transform = `perspective(600px) rotateY(${x}deg) rotateX(${-y}deg)`;
+    };
+    window.addEventListener("mousemove", handleMove);
+    return () => window.removeEventListener("mousemove", handleMove);
+  }, []);
 
   return (
     <section
       id="hero"
-      className="min-vh-100 d-flex align-items-center text-white"
-      style={{
-        background: "linear-gradient(90deg, #0f0f0f 0%, #1a1a1a 100%)",
-        overflow: "hidden",
-      }}
+      className="position-relative d-flex align-items-center text-white overflow-hidden"
+      style={{ minHeight: "100vh", background: "#000", padding: "5rem 0" }}
     >
-      <div className="container">
-        <div className="row align-items-center">
-          {/* Left: Parallax Image */}
-          <div className="col-md-6 text-center mb-4 mb-md-0">
+      {/* Ambient radial glow */}
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          width: "500px",
+          height: "500px",
+          background: "radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%)",
+          transform: "translate(-50%, -50%)",
+          zIndex: 0,
+        }}
+      />
+      <HeroBackground />
+      <HeroOverlay />
+
+      <div className="container position-relative" style={{ zIndex: 3 }}>
+        <div className="row align-items-center justify-content-center">
+          {/* LEFT IMAGE */}
+          <div className="col-lg-6 text-center mb-4 mb-lg-0 d-flex justify-content-center">
             <Tilt
-              tiltMaxAngleX={10}
-              tiltMaxAngleY={10}
+              tiltMaxAngleX={4}
+              tiltMaxAngleY={4}
+              transitionSpeed={800}
               glareEnable={true}
               glareMaxOpacity={0.2}
             >
-              <img
-                src={process.env.PUBLIC_URL + "/hero.jpg"}
-                alt="Raghav Hero"
-                className="img-fluid rounded-4 shadow-lg"
+              <div
                 style={{
-                  maxHeight: "500px",
                   width: "100%",
-                  objectFit: "cover",
+                  maxWidth: "640px",
+                  aspectRatio: "4 / 3",
+                  overflow: "hidden",
+                  borderRadius: "22px",
+                  boxShadow: "0 0 80px rgba(255,255,255,0.05)",
+                  transition: "all 0.4s ease",
                 }}
-              />
+              >
+                <img
+                  src={process.env.PUBLIC_URL + "/hero.jpg"}
+                  alt="Raghav"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    display: "block",
+                    objectFit: "cover",
+                    objectPosition: "center 55%", // centers torso
+                    filter: "brightness(1.05) contrast(1.08)",
+                  }}
+                />
+              </div>
             </Tilt>
           </div>
 
-          {/* Right: Text Content */}
-          <div className="col-md-6 text-center text-md-start fade-in">
-            <h1 className="display-4 fw-bold mb-2">
-              Raghav Narayan Ramachandran
-            </h1>
+          {/* RIGHT TEXT */}
+          <div className="col-lg-6 text-center text-lg-start" ref={textRef}>
+            <motion.h1 className="display-4 fw-bold mb-2 shimmer-text py-2" whileHover={{ scale: 1.02 }}>
+              Raghav Narayan
+            </motion.h1>
+
             <motion.h5
-              className="mb-4 text-white"
+              className="mb-4 role-text"
               initial={{ opacity: 0, y: 20 }}
               animate={controls}
               transition={{ duration: 0.6 }}
             >
               {roles[index]}
             </motion.h5>
-            <p className="lead mb-4 text-light">
-              Building scalable, AI-integrated platforms and microservices with
-              proven impact in automation, cloud-native delivery, and
-              performance optimization.
-            </p>
 
-            {/* Social Icons */}
-            <div className="d-flex justify-content-center justify-content-md-start gap-4 fs-3 flex-wrap mb-4">
+<p className="lead mb-4 text-light text-opacity-75">
+  Building AI-driven platforms and resilient cloud-native systems that simplify automation,
+  accelerate delivery, and create measurable business impact through scalable engineering.
+</p>
+
+
+            {/* ICONS */}
+            <div className="d-flex justify-content-center justify-content-lg-start gap-4 fs-3 flex-wrap mb-4">
               {[
                 { icon: <FaGithub />, link: "https://github.com/raghav-narayan" },
                 { icon: <FaLinkedin />, link: "https://linkedin.com/in/raghav-narayan98" },
@@ -92,12 +139,7 @@ export default function HeroSection() {
                     <img
                       src={process.env.PUBLIC_URL + "/logos/leetcode.png"}
                       alt="LeetCode"
-                      style={{
-                        width: "26px",
-                        height: "26px",
-                        objectFit: "contain",
-                        filter: "invert(1)",
-                      }}
+                      style={{ width: 26, height: 26, filter: "invert(1)" }}
                     />
                   ),
                   link: "https://leetcode.com/u/Raghav_Narayan/",
@@ -105,7 +147,7 @@ export default function HeroSection() {
                 { icon: <FaEnvelope />, link: "mailto:raghav.narayan.98@gmail.com" },
                 {
                   icon: <FaFilePdf />,
-                  link: "https://drive.google.com/file/d/13uFmj6uK9Hlvy2OZbDYD2C2c_P1Zs0pI/view?usp=drive_link",
+                  link: "https://drive.google.com/file/d/13uFmj6uK9Hlvy2OZbDYD2C2c_P1Zs0pI/view",
                 },
               ].map(({ icon, link }, i) => (
                 <motion.a
@@ -114,64 +156,54 @@ export default function HeroSection() {
                   className="text-white social-icon"
                   target="_blank"
                   rel="noreferrer"
-                  whileHover={{ scale: 1.22, rotate: 3, y: -1 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 220,
-                    damping: 14,
-                    mass: 0.4,
-                  }}
+                  whileHover={{ rotate: 8, scale: 1.05, y: -1 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 18 }}
                 >
                   {icon}
                 </motion.a>
               ))}
             </div>
 
-            {/* Dual Buttons */}
-            <div className="d-flex gap-3 justify-content-center justify-content-md-start flex-wrap">
-              <a
-                href="#contact"
-                className="btn btn-outline-light btn-sm px-4"
-              >
-                Let’s Connect
+            {/* BUTTONS */}
+            <div className="d-flex gap-3 justify-content-center justify-content-lg-start flex-wrap">
+              <a href="#contact" className="btn btn-outline-light btn-sm px-4">
+                Let’s Build
               </a>
               <a
-                href="https://drive.google.com/file/d/13uFmj6uK9Hlvy2OZbDYD2C2c_P1Zs0pI/view?usp=drive_link"
+                href="https://drive.google.com/file/d/13uFmj6uK9Hlvy2OZbDYD2C2c_P1Zs0pI/view"
                 target="_blank"
                 rel="noreferrer"
                 className="btn btn-light btn-sm px-4 text-dark fw-semibold"
               >
-                View Resume
+                Download Resume
               </a>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Additional Styling */}
       <style>{`
-        .fade-in {
-          animation: fadeInUp 1s ease-out;
+        .role-text { color:#ccc; text-shadow:0 0 8px rgba(255,255,255,0.25); }
+        .social-icon { transition:all .25s ease; opacity:.85; }
+        .social-icon:hover { opacity:1; text-shadow:0 0 18px rgba(255,255,255,0.9); }
+        .shimmer-text {
+          position: relative;
+          color: #fff;
+          overflow: hidden;
+          text-shadow: 0 0 20px rgba(255,255,255,0.25);
         }
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+        .shimmer-text::after {
+          content: "";
+          position: absolute;
+          top: 0; left: -100%;
+          width: 100%; height: 100%;
+          background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+          animation: shimmer 7s ease-in-out infinite;
         }
-        .social-icon {
-          transition: all 0.25s ease;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .social-icon:hover {
-          color: #12fff7 !important;
-          text-shadow: 0 0 12px rgba(18,255,247,0.7);
+        @keyframes shimmer {
+          0% { left: -100%; }
+          50% { left: 100%; }
+          100% { left: 100%; }
         }
       `}</style>
     </section>

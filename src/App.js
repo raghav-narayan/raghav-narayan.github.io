@@ -10,6 +10,8 @@ import TestimonialsSection from "./components/TestimonialsSection";
 import CertificationsSection from "./components/CertificationsSection";
 import ContactSection from "./components/ContactSection";
 import SideNav from "./components/SideNav";
+import IntroSection from "./components/IntroSection";
+import SectionDivider from "./components/SectionDivider";
 
 export default function App() {
   return (
@@ -18,6 +20,8 @@ export default function App() {
       <SideNav />
       <main> {/* Padding to offset fixed navbar */} 
         <HeroSection />
+        <SectionDivider />
+        <IntroSection />
         <AboutSection />
         <SkillsSection />
         <ExperienceSection />
@@ -26,7 +30,7 @@ export default function App() {
         <TestimonialsSection />
         <CertificationsSection />
         <ContactSection />
-        {/* <ScrollToTopButton /> */}
+        <ScrollToTopButton />
       </main>
     </>
   );
