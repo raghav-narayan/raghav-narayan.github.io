@@ -58,3 +58,20 @@
   background-color: #084298;
   transform: scale(1.1);
 }
+
+/* ---- GLOBAL LINK RESET FOR SIDENAV ---- */
+.sidenav-link,
+.sidenav-link:focus,
+.sidenav-link:active,
+.sidenav-link:hover,
+.sidenav-link:visited {
+  text-decoration: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Prevent default Bootstrap blue outline */
+a:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}

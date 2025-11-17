@@ -15,3 +15,21 @@ code {
 html {
   scroll-behavior: smooth;
 }
+
+
+/* Remove all link underline + focus glow */
+.sidenav-link,
+.sidenav-link:focus,
+.sidenav-link:active,
+.sidenav-link:hover,
+.sidenav-link:visited {
+  text-decoration: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove Bootstrap default blue outline */
+a:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}

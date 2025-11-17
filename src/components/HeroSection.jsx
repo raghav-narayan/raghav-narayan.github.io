@@ -49,7 +49,7 @@ export default function HeroSection() {
 
   return (
     <section
-      id="hero"
+      id="home"
       className="position-relative d-flex align-items-center text-white overflow-hidden"
       style={{ minHeight: "100vh", background: "#000", padding: "5rem 0" }}
     >
