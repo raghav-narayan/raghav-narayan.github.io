@@ -31,9 +31,9 @@ const Mascot = ({ direction, isHovering }) => {
       style={{
         left: "0",
         top: "50%",
-        transform: "translate(-125%, -50%)",
-        width: 85,
-        height: 85,
+        transform: "translate(-115%, -50%)",
+        width: 70,
+        height: 70,
         zIndex: 20,
         pointerEvents: "none"
       }}
@@ -55,17 +55,17 @@ const Mascot = ({ direction, isHovering }) => {
           scale: { duration: 0.25 }
         }}
         style={{
-          width: 85,
-          height: 85,
+          width: 70,
+          height: 70,
           filter: isHovering
-            ? "drop-shadow(0 0 20px rgba(0,150,255,0.6))"
-            : "drop-shadow(0 0 10px rgba(0,150,255,0.25))"
+            ? "drop-shadow(0 0 16px rgba(0,150,255,0.6))"
+            : "drop-shadow(0 0 8px rgba(0,150,255,0.25))"
         }}
       >
         {/* Futuristic AI head - pure SVG */}
         <svg
-          width="85"
-          height="85"
+          width="70"
+          height="70"
           viewBox="0 0 120 120"
           style={{ overflow: "visible" }}
         >
@@ -349,9 +349,9 @@ export default function SideNav() {
 
   return (
     <div
-      className="position-fixed top-50 start-0 translate-middle-y ps-4 z-3"
+      className="position-fixed top-50 start-0 translate-middle-y ps-3 z-3"
       style={{
-        width: "110px",
+        width: "90px",
         overflow: "visible",
         pointerEvents: "none"
       }}
@@ -360,7 +360,7 @@ export default function SideNav() {
         className="d-flex flex-column gap-4 position-relative align-items-center"
         style={{
           pointerEvents: "auto",
-          padding: "35px 0"
+          padding: "18px 0"
         }}
       >
         {sections.map((s) => {
@@ -372,7 +372,7 @@ export default function SideNav() {
             <div
               key={s.id}
               className="position-relative"
-              style={{ height: 86 }}
+              style={{ height: 72 }}
             >
               {isActive && (
                 <>
@@ -390,8 +390,8 @@ export default function SideNav() {
                   href={`#${s.id}`}
                   className="sidenav-link d-flex align-items-center justify-content-center rounded-circle position-relative"
                   style={{
-                    width: 58,
-                    height: 58,
+                    width: 50,
+                    height: 50,
                     background: isActive
                       ? `linear-gradient(145deg, ${ACCENT_COLOR}, #005bd5)`
                       : ICON_BASE_COLOR,

@@ -28,7 +28,7 @@ export default function App() {
         <TestimonialsSection />
         <CertificationsSection />
         <ContactSection />
-        <ScrollToTopButton />
+        {/* <ScrollToTopButton /> */}
       </main>
     </>
   );
